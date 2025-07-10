@@ -21,7 +21,8 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/projects" element={<AllProject />} title="Projects" />
             <Route path="/projects/new" element={<ProjectForm />} />
-            <Route path="/projects/edit/:id" element={<ProjectForm isEdit />} />
+            {/* Route này sẽ nhận query string ?view=1 hoặc ?edit=1, không cần khai báo riêng */}
+            <Route path="/project" element={<ProjectForm />} />
             <Route path="/tasks" element={<Task />} title="Tasks" />
             <Route path="/users" element={<User />} title="Users" />
             <Route path="/reports" element={<Report />} title="Reports" />

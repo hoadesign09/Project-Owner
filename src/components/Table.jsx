@@ -4,7 +4,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import "../assets/css/table.css";
 
-function Table({ columns, data, loading, error, pageSize = 10, onEdit, onDelete }) {
+function Table({ columns = [], data = [], loading, error, pageSize = 10, onEdit, onDelete }) {
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(data.length / pageSize);
   const pagedData = data.slice((page - 1) * pageSize, page * pageSize);
