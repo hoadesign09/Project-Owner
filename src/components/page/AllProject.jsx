@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 import { useNavigate, Link } from "react-router-dom";
 import Table from "../Table";
+import jsPDF from "jspdf";
+import { autoTable } from 'jspdf-autotable';
 
 const columns = [
   { key: "id", title: "ID" },
@@ -82,7 +85,7 @@ function AllProject() {
           ...col,
           render: (value, row) => (
             <span
-              style={{ color: "#1976d2", cursor: "pointer", textDecoration: "underline" }}
+              style={{ color: "#1976d2", cursor: "pointer", textDecoration: "none" }}
               onClick={() => handleEdit(row)}
             >
               {value}
@@ -92,6 +95,17 @@ function AllProject() {
       : col
   );
 
+  const exportToPDF = (demoData) => {
+    // Hàm xuất dữ liệu sang PDF
+    const doc = new jsPDF();
+    doc.text("Danh sách Projects", 20, 20);
+    autoTable(doc, {
+      head: [["ID", "Name", "Description", "Status"]],
+      body: demoData.map(item => [item.id, item.name, item.desc, item.status]),
+    }); 
+    doc.save("projects.pdf");
+  };
+
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
@@ -100,6 +114,9 @@ function AllProject() {
             + Thêm mới Project
           </button>
         </Link>
+        <div>
+          <button onClick={() => exportToPDF(demoData)}>Xuất file PDF</button>
+        </div>
       </div>
       <Table
         columns={columnsWithIdLink}
