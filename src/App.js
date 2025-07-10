@@ -9,6 +9,7 @@ import Report from './components/page/Report';
 import Service from './components/page/Service';
 import './App.css';
 import Ticket from './components/page/Ticket';
+import ProjectForm from './components/ProjectForm';
 
 function App() {
   return (
@@ -18,12 +19,15 @@ function App() {
         <div className="dashboard">
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/projects" element={<AllProject />} />
-            <Route path="/tasks" element={<Task />} />
-            <Route path="/users" element={<User />} />
-            <Route path="/reports" element={<Report />} />
-            <Route path="/tickets" element={<Ticket />} />
-            <Route path="/services" element={<Service />} />
+            <Route path="/projects" element={<AllProject />} title="Projects" />
+            <Route path="/projects/new" element={<ProjectForm />} />
+            <Route path="/projects/edit/:id" element={<ProjectForm isEdit />} />
+            <Route path="/tasks" element={<Task />} title="Tasks" />
+            <Route path="/users" element={<User />} title="Users" />
+            <Route path="/reports" element={<Report />} title="Reports" />
+            <Route path="/tickets" element={<Ticket />} title="Tickets" />
+            <Route path="/services" element={<Service />} title="Services" />
+
           </Routes>
         </div>
       </div>
